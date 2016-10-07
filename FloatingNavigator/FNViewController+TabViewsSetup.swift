@@ -8,28 +8,23 @@
 
 import UIKit
 
-class FNViewController_TabViewsSetup: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+extension FNViewController {
+    
+    /* Creating TabView and add in main view */
+    private func createTabViews() {
+        
+        for _ in 0...tabViewsControllers.count - 1 {
+            
+            let tabView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+            tabView.translatesAutoresizingMaskIntoConstraints = false
+            self.tabViews.append(tabView)
+            self.view.addSubview(tabView)
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    /* Setup action to swipe gesture in FNSegmentControl */
+    func switchTabView(gesture: UIGestureRecognizer) {
+        
+        scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(gesture.view!.tag), y: 0), animated: true)
     }
-    */
-
 }

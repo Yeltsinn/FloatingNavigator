@@ -8,12 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		7033EAD61DA6E81900CD687F /* FloatingNavigator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033EAD41DA6E81900CD687F /* FloatingNavigator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033EADF1DA6EBFF00CD687F /* FNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7033EADE1DA6EBFF00CD687F /* FNViewController.swift */; };
+		70481CE11DA7B9F10046DC48 /* FNViewController+TabViewsSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70481CE01DA7B9F10046DC48 /* FNViewController+TabViewsSetup.swift */; };
+		70481CE31DA7CAEC0046DC48 /* FNViewController+ScrollViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70481CE21DA7CAEC0046DC48 /* FNViewController+ScrollViewSetup.swift */; };
+		70481CE51DA7CD800046DC48 /* FNViewController+SearchBarSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70481CE41DA7CD800046DC48 /* FNViewController+SearchBarSetup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7033EAD11DA6E81900CD687F /* FloatingNavigator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FloatingNavigator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7033EAD41DA6E81900CD687F /* FloatingNavigator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloatingNavigator.h; sourceTree = "<group>"; };
 		7033EAD51DA6E81900CD687F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7033EADE1DA6EBFF00CD687F /* FNViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNViewController.swift; sourceTree = "<group>"; };
+		70481CE01DA7B9F10046DC48 /* FNViewController+TabViewsSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FNViewController+TabViewsSetup.swift"; sourceTree = "<group>"; };
+		70481CE21DA7CAEC0046DC48 /* FNViewController+ScrollViewSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FNViewController+ScrollViewSetup.swift"; sourceTree = "<group>"; };
+		70481CE41DA7CD800046DC48 /* FNViewController+SearchBarSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FNViewController+SearchBarSetup.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +56,10 @@
 			children = (
 				7033EAD41DA6E81900CD687F /* FloatingNavigator.h */,
 				7033EAD51DA6E81900CD687F /* Info.plist */,
+				7033EADE1DA6EBFF00CD687F /* FNViewController.swift */,
+				70481CE01DA7B9F10046DC48 /* FNViewController+TabViewsSetup.swift */,
+				70481CE21DA7CAEC0046DC48 /* FNViewController+ScrollViewSetup.swift */,
+				70481CE41DA7CD800046DC48 /* FNViewController+SearchBarSetup.swift */,
 			);
 			path = FloatingNavigator;
 			sourceTree = "<group>";
@@ -96,6 +108,7 @@
 					7033EAD01DA6E81900CD687F = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = WD9PFDY3H6;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -132,6 +145,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7033EADF1DA6EBFF00CD687F /* FNViewController.swift in Sources */,
+				70481CE31DA7CAEC0046DC48 /* FNViewController+ScrollViewSetup.swift in Sources */,
+				70481CE51DA7CD800046DC48 /* FNViewController+SearchBarSetup.swift in Sources */,
+				70481CE11DA7B9F10046DC48 /* FNViewController+TabViewsSetup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +257,7 @@
 		7033EADA1DA6E81900CD687F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = WD9PFDY3H6;
@@ -252,6 +270,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = BEPiD.FloatingNavigator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -259,6 +278,7 @@
 		7033EADB1DA6E81900CD687F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = WD9PFDY3H6;
@@ -294,6 +314,7 @@
 				7033EADB1DA6E81900CD687F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
