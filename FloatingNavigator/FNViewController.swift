@@ -13,6 +13,7 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
     /* TabViews Structural Attributes */
     internal var tabViewsHeigth: CGFloat = 50
     internal var tabViewIndicatorHeigth: CGFloat = 2
+    internal var scaleFactorOfImageInTabView: CGFloat = 1
     internal var distanceBetweenTabViewComponents: CGFloat = 2
     internal var distanceTabViewComponentsToSideBounds: CGFloat = 10
     
