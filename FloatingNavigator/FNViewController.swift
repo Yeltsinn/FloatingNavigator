@@ -28,9 +28,9 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
     internal var colorOfSearchBarTextField: UIColor = UIColor.white
     internal var colorOfSearchBarPlaceholder: UIColor = UIColor.lightGray
     internal var colorOfSearchBarBox: UIColor = UIColor(colorLiteralRed: 225.0/255,
-                                                            green: 228.0/255,
-                                                            blue: 229.0/255,
-                                                            alpha: 1.0)
+                                                        green: 228.0/255,
+                                                        blue: 229.0/255,
+                                                        alpha: 1.0)
     
     /* DataSource Attributes */
     internal var numberOfTabs: Int = 0
@@ -51,7 +51,7 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
     internal var mainView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     internal var headerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0)) {
         didSet {
-
+            
         }
     }
     
@@ -59,7 +59,105 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
     internal var constraintsToActivate = [NSLayoutConstraint]()
     internal var distanceTabIndicatorToMarginLeftConstraint: NSLayoutConstraint!
     
+    /* Delegates and DataSource */
+    var fNViewControllerDataSource: FNViewControllerDataSource!
+    var fNViewControllerDelegate: FNViewControllerDelegate!
+    
     func setupFNSegmentControl() {
         
+        checkFNViewControllerDataSourceRequired()
+        checkFNViewControllerDataSourceOptional()
+        if addSearchController { setupSearchController() }
+        setupFNScrollView(numberOfPagesInScroll: numberOfTabs)
+        createTabViews()
+        setupConstraints()
+    }
+    
+    /* Check DataSouce Required Values */
+    private func checkFNViewControllerDataSourceRequired() {
+        numberOfTabs = fNViewControllerDataSource.numberTabsInSegmentControl()
+        
+        for index in 0...numberOfTabs - 1 {
+            tabViewsControllers.append(fNViewControllerDataSource.controllerOfTabViewAtIndex(index: index))
+        }
+    }
+    
+    /* Check DataSouce Optional Values */
+    private func checkFNViewControllerDataSourceOptional() {
+        
+        for index in 0...numberOfTabs - 1 {
+            
+            if let title = fNViewControllerDataSource?.titleForTabViewAtIndex?(index: index) {
+                tabViewsTitles.append(title)
+            }
+        }
+        
+        for index in 0...numberOfTabs - 1 {
+            
+            if let image = fNViewControllerDataSource?.imageForTabViewAtIndex?(index: index) {
+                tabViewsImages.append(UIImageView(image: image))
+            }
+        }
+    }
+    
+    /* Check Delegate Optional Values */
+    private func checkFNViewControllerDelegateOptional() {
+        
+        if let bool = fNViewControllerDelegate?.addSearchBar?() {
+            addSearchController = bool
+        }
+        
+        if let value = fNViewControllerDelegate?.setTabViewIndicatorHeigth?() {
+            tabViewIndicatorHeigth = value
+        }
+        
+        if let value = fNViewControllerDelegate?.setTabViewsHeigth?() {
+            tabViewsHeigth = value
+        }
+        
+        if let value = fNViewControllerDelegate?.setScaleFactorOfImageInTabView?() {
+            scaleFactorOfImageInTabView = value
+        }
+        
+        if let value = fNViewControllerDelegate?.setDistanceTabViewComponentsToSideBounds?() {
+            distanceTabViewComponentsToSideBounds = value
+        }
+        
+        if let value = fNViewControllerDelegate?.setDistanceBetweenTabViewComponents?() {
+            distanceBetweenTabViewComponents = value
+        }
+        
+        if let color = fNViewControllerDelegate?.setColorOfTabViewTitlesInActiveState?() {
+            colorOfTabViewTitlesInActiveState = color
+        }
+        
+        if let color = fNViewControllerDelegate?.setColorOfTabViewTitlesInInactiveState?() {
+            colorOfTabViewTitlesInInactiveState = color
+        }
+        
+        if let color = fNViewControllerDelegate?.setColorOfTabViewIndicator?() {
+            colorOfTabViewIndicator = color
+        }
+    }
+    
+    /* Setup Constraints */
+    private func setupConstraints() {
+        
+        if addSearchController {
+            self.setupSearchBarConstraints()
+        }
+        
+        self.setupMainViewConstraints()
+        self.setupScrollViewConstraints()
+        self.setupHeaderViewConstraints()
+        self.setupTabIndicatorConstraints()
+        self.setHeightConstraintsOfTabViews()
+        self.setWidthConstraintsOfTabViews()
+        self.setCenterYConstraintOfTabViews()
+        self.setConstraintsToFirstAndLastTabViews()
+        self.setupViewControllersConstraints()
+        self.setConstraintDistanceBetweenTabViews()
+        self.setupLabelsTitlesAndImagesConstraints()
+        NSLayoutConstraint.activate(constraintsToActivate)
     }
 }

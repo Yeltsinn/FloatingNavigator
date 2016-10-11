@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7033EAD61DA6E81900CD687F /* FloatingNavigator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033EAD41DA6E81900CD687F /* FloatingNavigator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7033EADF1DA6EBFF00CD687F /* FNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7033EADE1DA6EBFF00CD687F /* FNViewController.swift */; };
+		70399DE91DAD8B6A0011C465 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70399DE81DAD8B6A0011C465 /* Util.swift */; };
 		70481CE11DA7B9F10046DC48 /* FNViewController+TabViewsSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70481CE01DA7B9F10046DC48 /* FNViewController+TabViewsSetup.swift */; };
 		70481CE31DA7CAEC0046DC48 /* FNViewController+ScrollViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70481CE21DA7CAEC0046DC48 /* FNViewController+ScrollViewSetup.swift */; };
 		70481CE51DA7CD800046DC48 /* FNViewController+SearchBarSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70481CE41DA7CD800046DC48 /* FNViewController+SearchBarSetup.swift */; };
@@ -20,6 +21,7 @@
 		7033EAD41DA6E81900CD687F /* FloatingNavigator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloatingNavigator.h; sourceTree = "<group>"; };
 		7033EAD51DA6E81900CD687F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7033EADE1DA6EBFF00CD687F /* FNViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FNViewController.swift; sourceTree = "<group>"; };
+		70399DE81DAD8B6A0011C465 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		70481CE01DA7B9F10046DC48 /* FNViewController+TabViewsSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FNViewController+TabViewsSetup.swift"; sourceTree = "<group>"; };
 		70481CE21DA7CAEC0046DC48 /* FNViewController+ScrollViewSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FNViewController+ScrollViewSetup.swift"; sourceTree = "<group>"; };
 		70481CE41DA7CD800046DC48 /* FNViewController+SearchBarSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FNViewController+SearchBarSetup.swift"; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				70481CE01DA7B9F10046DC48 /* FNViewController+TabViewsSetup.swift */,
 				70481CE21DA7CAEC0046DC48 /* FNViewController+ScrollViewSetup.swift */,
 				70481CE41DA7CD800046DC48 /* FNViewController+SearchBarSetup.swift */,
+				70399DE81DAD8B6A0011C465 /* Util.swift */,
 			);
 			path = FloatingNavigator;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7033EADF1DA6EBFF00CD687F /* FNViewController.swift in Sources */,
+				70399DE91DAD8B6A0011C465 /* Util.swift in Sources */,
 				70481CE31DA7CAEC0046DC48 /* FNViewController+ScrollViewSetup.swift in Sources */,
 				70481CE51DA7CD800046DC48 /* FNViewController+SearchBarSetup.swift in Sources */,
 				70481CE71DA7D0710046DC48 /* FNViewController+Constraints.swift in Sources */,

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yeltsin Suares Lobato Gama. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension FNViewController {
     
@@ -24,7 +24,7 @@ extension FNViewController {
     
     /* MARK: ScrollView Delegate Methods */
     
-    internal func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         distanceTabIndicatorToMarginLeftConstraint.constant = scrollView.contentOffset.x/CGFloat(tabViewsControllers.count)
         self.view.layoutIfNeeded()
         

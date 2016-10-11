@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yeltsin Suares Lobato Gama. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension FNViewController {
     
@@ -164,14 +164,17 @@ extension FNViewController {
                 previousView = currentTabView
             }
         }
+        if numberOfTabs > 1 {
+            let constraintDistancePenultimateTabViewToLastTabView = NSLayoutConstraint(item: tabViews[tabViews.count - 2],
+                                                                                       attribute: NSLayoutAttribute.right,
+                                                                                       relatedBy: NSLayoutRelation.equal,
+                                                                                       toItem: tabViews.last,
+                                                                                       attribute: NSLayoutAttribute.left,
+                                                                                       multiplier: 1, constant: 0)
+            constraintsToActivate.append(constraintDistancePenultimateTabViewToLastTabView)
+        }
         
-        let constraintDistancePenultimateTabViewToLastTabView = NSLayoutConstraint(item: tabViews[tabViews.count - 2],
-                                                                                   attribute: NSLayoutAttribute.right,
-                                                                                   relatedBy: NSLayoutRelation.equal,
-                                                                                   toItem: tabViews.last,
-                                                                                   attribute: NSLayoutAttribute.left,
-                                                                                   multiplier: 1, constant: 0)
-        constraintsToActivate.append(constraintDistancePenultimateTabViewToLastTabView)
+        
     }
     
     /* MARK: Controllers Constraints */
@@ -197,13 +200,13 @@ extension FNViewController {
                                                                      constant: 0)
         
         let distanceFirstViewControllerToMarginLeft = NSLayoutConstraint(item: tabViewsControllers.first!.view,
-       
-                                                                        attribute: NSLayoutAttribute.left,
-                                                                        relatedBy: NSLayoutRelation.equal,
-                                                                        toItem: self.scrollView,
-                                                                        attribute: NSLayoutAttribute.left,
-                                                                        multiplier: 1,
-                                                                        constant: 0)
+                                                                         
+                                                                         attribute: NSLayoutAttribute.left,
+                                                                         relatedBy: NSLayoutRelation.equal,
+                                                                         toItem: self.scrollView,
+                                                                         attribute: NSLayoutAttribute.left,
+                                                                         multiplier: 1,
+                                                                         constant: 0)
         
         let sizeWidthFirstViewController = NSLayoutConstraint(item: tabViewsControllers.first!.view,
                                                               attribute: NSLayoutAttribute.width,
@@ -268,7 +271,7 @@ extension FNViewController {
     
     /* MARK: Tab Indicator Constraints --- */
     
-    internal func setupTabIndicator() {
+    internal func setupTabIndicatorConstraints() {
         tabViewIndicator = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 200))
         tabViewIndicator.backgroundColor = colorOfTabViewIndicator
         tabViewIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -318,7 +321,7 @@ extension FNViewController {
     
     /* MARK: Tab Header View Constraints */
     
-    func setupHeaderView() {
+    func setupHeaderViewConstraints() {
         
         self.mainView.addSubview(headerView)
         
@@ -356,7 +359,7 @@ extension FNViewController {
      
      View Constraints */
     
-    func setupMainView() {
+    func setupMainViewConstraints() {
         
         self.mainView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(mainView)
@@ -447,8 +450,8 @@ extension FNViewController {
     
     // MARK: --- SETUP SETUP LABELS AND IMAGES CONSTRAINTS ---
     
-    func setupLabelsTitlesAndImages() {
-                
+    func setupLabelsTitlesAndImagesConstraints() {
+        
         for (index, view) in tabViews.enumerated() {
             
             let stackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))

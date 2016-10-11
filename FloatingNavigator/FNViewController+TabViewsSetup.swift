@@ -11,7 +11,7 @@ import UIKit
 extension FNViewController {
     
     /* Creating TabView and add in main view */
-    private func createTabViews() {
+    func createTabViews() {
         
         for _ in 0...tabViewsControllers.count - 1 {
             

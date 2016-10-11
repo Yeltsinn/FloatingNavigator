@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yeltsin Suares Lobato Gama. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension FNViewController {
     
