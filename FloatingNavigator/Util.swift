@@ -36,9 +36,9 @@ protocol FNViewControllerDelegate {
 @objc
 protocol FNViewControllerSearchBarCustomize {
     
-    @objc optional func colorOfSearchBarBox(searchBar: UISearchBar) -> UIColor
-    @objc optional func colorOfSearchBarText(searchBar: UISearchBar) -> UIColor
-    @objc optional func colorOfSearchBarIcon(searchBar: UISearchBar) -> UIColor
-    @objc optional func colorOfSearchBarTextField(searchBar: UISearchBar) -> UIColor
-    @objc optional func colorOfSearchBarPlaceholder(searchBar: UISearchBar) -> UIColor
+    @objc optional func setColorOfSearchBarBox() -> UIColor
+    @objc optional func setColorOfSearchBarText() -> UIColor
+    @objc optional func setColorOfSearchBarIcon() -> UIColor
+    @objc optional func setColorOfSearchBarTextField() -> UIColor
+    @objc optional func setColorOfSearchBarPlaceholder() -> UIColor
 }

@@ -15,6 +15,11 @@ extension FNViewController {
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         self.headerView = searchController.searchBar
+        customizeSearchBar(colorOfSearchBarText: colorOfSearchBarText,
+                           colorOfSearchBarTextField: colorOfSearchBarTextField,
+                           colorOfSearchBarBox: colorOfSearchBarBox,
+                           colorOfSearchBarPlaceholder: colorOfSearchBarPlaceholder,
+                           colorOfSearchBarIcon: colorOfSearchBarIcon)
     }
     
     

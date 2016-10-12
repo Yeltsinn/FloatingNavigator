@@ -62,12 +62,19 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
     /* Delegates and DataSource */
     var fNViewControllerDataSource: FNViewControllerDataSource!
     var fNViewControllerDelegate: FNViewControllerDelegate!
+    var fNViewControllerSearchBarCustomize: FNViewControllerSearchBarCustomize!
     
     func setupFNSegmentControl() {
         
         checkFNViewControllerDataSourceRequired()
         checkFNViewControllerDataSourceOptional()
-        if addSearchController { setupSearchController() }
+        checkFNViewControllerDelegateOptional()
+        
+        if addSearchController {
+            checkFNViewControllerSearchBarCustomizeOptional()
+            setupSearchController()
+        }
+        
         setupFNScrollView(numberOfPagesInScroll: numberOfTabs)
         createTabViews()
         setupConstraints()
@@ -137,6 +144,30 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
         
         if let color = fNViewControllerDelegate?.setColorOfTabViewIndicator?() {
             colorOfTabViewIndicator = color
+        }
+    }
+    
+    /* Check SearchBarCustomize Delegate Optional Values */
+    private func checkFNViewControllerSearchBarCustomizeOptional() {
+        
+        if let color = fNViewControllerSearchBarCustomize?.setColorOfSearchBarBox?() {
+            colorOfSearchBarBox = color
+        }
+        
+        if let color = fNViewControllerSearchBarCustomize?.setColorOfSearchBarIcon?() {
+            colorOfSearchBarIcon = color
+        }
+        
+        if let color = fNViewControllerSearchBarCustomize?.setColorOfSearchBarText?() {
+            colorOfSearchBarText = color
+        }
+        
+        if let color = fNViewControllerSearchBarCustomize?.setColorOfSearchBarTextField?() {
+            colorOfSearchBarTextField = color
+        }
+        
+        if let color = fNViewControllerSearchBarCustomize?.setColorOfSearchBarPlaceholder?() {
+            colorOfSearchBarPlaceholder = color
         }
     }
     
