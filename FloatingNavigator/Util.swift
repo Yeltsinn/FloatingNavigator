@@ -11,14 +11,16 @@ import UIKit
 @objc
 protocol FNViewControllerDataSource {
     
-    func numberTabsInSegmentControl() -> Int
+    func numberOfTabsInSegmentControl() -> Int
     func controllerOfTabViewAtIndex(index: Int) -> UIViewController
     @objc optional func titleForTabViewAtIndex(index: Int) -> String
-    @objc optional func imageForTabViewAtIndex(index: Int) -> UIImage
+    @objc optional func imageForTabViewAtIndexInInactiveState(index: Int) -> UIImage
+    @objc optional func imageForTabViewAtIndexInActiveState(index: Int) -> UIImage
 }
 
 @objc
 protocol FNViewControllerDelegate {
+    
     
     @objc optional func addSearchBar() -> Bool
     @objc optional func setTabViewsHeigth() -> CGFloat
@@ -41,4 +43,9 @@ protocol FNViewControllerSearchBarCustomize {
     @objc optional func setColorOfSearchBarIcon() -> UIColor
     @objc optional func setColorOfSearchBarTextField() -> UIColor
     @objc optional func setColorOfSearchBarPlaceholder() -> UIColor
+}
+
+
+enum TabViewSeparatorStyle {
+    case none, singleLine
 }

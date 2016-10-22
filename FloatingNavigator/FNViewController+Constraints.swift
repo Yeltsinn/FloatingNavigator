@@ -272,10 +272,61 @@ extension FNViewController {
     /* MARK: Tab Indicator Constraints --- */
     
     internal func setupTabIndicatorConstraints() {
+        
+        /* Setup TabView Base */
+        let tabViewBase =  UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        tabViewBase.backgroundColor = UIColor(colorLiteralRed: 225.0/255,
+                                              green: 228.0/255,
+                                              blue: 229.0/255,
+                                              alpha: 1.0)
+        tabViewBase.translatesAutoresizingMaskIntoConstraints = false
+        self.mainView.addSubview(tabViewBase)
+        
+        let tabViewBottomSeparatorDistanceToBottom = NSLayoutConstraint(item: tabViewBase,
+                                                                        attribute: NSLayoutAttribute.bottom,
+                                                                        relatedBy: NSLayoutRelation.equal,
+                                                                        toItem: tabViews.first,
+                                                                        attribute: NSLayoutAttribute.bottom,
+                                                                        multiplier: 1,
+                                                                        constant: 0)
+        
+        let constraintHeightTabViewSeparator = NSLayoutConstraint(item: tabViewBase,
+                                                                  attribute: NSLayoutAttribute.height,
+                                                                  relatedBy: NSLayoutRelation.equal,
+                                                                  toItem: nil,
+                                                                  attribute: NSLayoutAttribute.height,
+                                                                  multiplier: 1,
+                                                                  constant: 1)
+        
+        let tabViewBottomSeparatorDistanceToMarginLeft = NSLayoutConstraint(item: tabViewBase,
+                                                                            attribute: NSLayoutAttribute.left,
+                                                                            relatedBy: NSLayoutRelation.equal,
+                                                                            toItem: self.mainView,
+                                                                            attribute: NSLayoutAttribute.left,
+                                                                            multiplier: 1,
+                                                                            constant: 0)
+        
+        let tabViewBottomSeparatorDistanceToMarginRight = NSLayoutConstraint(item: tabViewBase,
+                                                                             attribute: NSLayoutAttribute.right,
+                                                                             relatedBy: NSLayoutRelation.equal,
+                                                                             toItem: self.mainView,
+                                                                             attribute: NSLayoutAttribute.right,
+                                                                             multiplier: 1,
+                                                                             constant: 0)
+        
+        self.constraintsToActivate.append(contentsOf: [
+            tabViewBottomSeparatorDistanceToBottom,
+            constraintHeightTabViewSeparator,
+            tabViewBottomSeparatorDistanceToMarginLeft,
+            tabViewBottomSeparatorDistanceToMarginRight])
+        
+        
+        
+        /* Setup TabView Indicator */
         tabViewIndicator = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 200))
         tabViewIndicator.backgroundColor = colorOfTabViewIndicator
         tabViewIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.mainView.addSubview(tabViewIndicator)
+        self.view.addSubview(tabViewIndicator)
         
         let constrainsDistanceToTopTabIndicator = NSLayoutConstraint(item: tabViewIndicator,
                                                                      attribute: NSLayoutAttribute.bottom,
@@ -448,7 +499,7 @@ extension FNViewController {
             distanceBottom])
     }
     
-    // MARK: --- SETUP SETUP LABELS AND IMAGES CONSTRAINTS ---
+    // MARK: --- SETUP LABELS AND IMAGES CONSTRAINTS ---
     
     func setupLabelsTitlesAndImagesConstraints() {
         
@@ -561,6 +612,64 @@ extension FNViewController {
                 tapGesture.numberOfTapsRequired = 1
                 labelTitle.isUserInteractionEnabled = true
                 labelTitle.addGestureRecognizer(tapGesture)
+            }
+        }
+    }
+    
+    // MARK: --- SETUP TABVIEWS SEPARATOR ---
+    
+    func setupTabViewsSeparator() {
+        
+        if tabViewsSeparatorStyle == .singleLine {
+            
+            let sizeWidthOfTabViews = view.frame.width/CGFloat(numberOfTabs)
+            for value in 1...numberOfTabs - 1 {
+                
+                let tabViewSeparator = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                tabViewSeparator.backgroundColor = UIColor(colorLiteralRed: 225.0/255,
+                                                           green: 228.0/255,
+                                                           blue: 229.0/255,
+                                                           alpha: 1.0)
+                tabViewSeparator.translatesAutoresizingMaskIntoConstraints = false
+                self.mainView.addSubview(tabViewSeparator)
+                
+                let constrainsDistanceToTopTabViewSeparator = NSLayoutConstraint(item: tabViewSeparator,
+                                                                                 attribute: NSLayoutAttribute.top,
+                                                                                 relatedBy: NSLayoutRelation.equal,
+                                                                                 toItem: tabViews.first,
+                                                                                 attribute: NSLayoutAttribute.top,
+                                                                                 multiplier: 1,
+                                                                                 constant: 0)
+                
+                let constrainsDistanceToBottomTabViewSeparator = NSLayoutConstraint(item: tabViewSeparator,
+                                                                                    attribute: NSLayoutAttribute.bottom,
+                                                                                    relatedBy: NSLayoutRelation.equal,
+                                                                                    toItem: tabViews.first,
+                                                                                    attribute: NSLayoutAttribute.bottom,
+                                                                                    multiplier: 1,
+                                                                                    constant: 0)
+                
+                let constraintWidthTabViewSeparator = NSLayoutConstraint(item: tabViewSeparator,
+                                                                         attribute: NSLayoutAttribute.width,
+                                                                         relatedBy: NSLayoutRelation.equal,
+                                                                         toItem: nil,
+                                                                         attribute: NSLayoutAttribute.width,
+                                                                         multiplier: 1,
+                                                                         constant: 0.5)
+                
+                let tabViewSeparatorDistanceToMarginLeft = NSLayoutConstraint(item: tabViewSeparator,
+                                                                              attribute: NSLayoutAttribute.left,
+                                                                              relatedBy: NSLayoutRelation.equal,
+                                                                              toItem: self.mainView,
+                                                                              attribute: NSLayoutAttribute.left,
+                                                                              multiplier: 1,
+                                                                              constant: CGFloat(value) * sizeWidthOfTabViews)
+                
+                NSLayoutConstraint.activate([
+                    constrainsDistanceToTopTabViewSeparator,
+                    constrainsDistanceToBottomTabViewSeparator,
+                    constraintWidthTabViewSeparator,
+                    tabViewSeparatorDistanceToMarginLeft])
             }
         }
     }

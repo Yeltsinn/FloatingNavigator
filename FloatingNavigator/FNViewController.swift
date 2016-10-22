@@ -40,6 +40,8 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
     internal var tabViewIndicator: UIView!
     internal var tabViewsTitles = [String]()
     internal var tabViewsImages = [UIImageView]()
+    internal var tabViewsImagesActiveState = [UIImage]()
+    internal var tabViewsImagesInactiveState = [UIImage]()
     internal var tabViewsTitlesLabels = [UILabel]()
     internal var tabViewsControllers = [UIViewController]()
     
@@ -49,9 +51,11 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
     internal var currentControllerInFocus: UIViewController!
     internal var scrollView: UIScrollView!
     internal var mainView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    internal var headerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0)) {
+    internal var headerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    internal var tabViewsSeparatorStyle: TabViewSeparatorStyle = .none {
         didSet {
-            
+            self.checkFNViewControllerDataSourceRequired()
+            self.setupTabViewsSeparator()
         }
     }
     
@@ -69,6 +73,7 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
         checkFNViewControllerDataSourceRequired()
         checkFNViewControllerDataSourceOptional()
         checkFNViewControllerDelegateOptional()
+        setupImageViews()
         
         if addSearchController {
             checkFNViewControllerSearchBarCustomizeOptional()
@@ -82,7 +87,8 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
     
     /* Check DataSouce Required Values */
     private func checkFNViewControllerDataSourceRequired() {
-        numberOfTabs = fNViewControllerDataSource.numberTabsInSegmentControl()
+        guard numberOfTabs == 0 else { return }
+        numberOfTabs = fNViewControllerDataSource.numberOfTabsInSegmentControl()
         
         for index in 0...numberOfTabs - 1 {
             tabViewsControllers.append(fNViewControllerDataSource.controllerOfTabViewAtIndex(index: index))
@@ -97,13 +103,30 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
             if let title = fNViewControllerDataSource?.titleForTabViewAtIndex?(index: index) {
                 tabViewsTitles.append(title)
             }
+            
+            if let image = fNViewControllerDataSource?.imageForTabViewAtIndexInInactiveState?(index: index) {
+                tabViewsImagesInactiveState.append(image)
+            }
+            
+            if let image = fNViewControllerDataSource?.imageForTabViewAtIndexInActiveState?(index: index) {
+                tabViewsImagesActiveState.append(image)
+            }
+        }
+    }
+    
+    private func setupImageViews() {
+        
+        for image in tabViewsImagesInactiveState {
+            tabViewsImages.append(UIImageView(image: image))
         }
         
-        for index in 0...numberOfTabs - 1 {
-            
-            if let image = fNViewControllerDataSource?.imageForTabViewAtIndex?(index: index) {
+        if tabViewsImagesInactiveState.isEmpty {
+            for image in tabViewsImagesActiveState {
                 tabViewsImages.append(UIImageView(image: image))
             }
+        } else {
+            guard !tabViewsImagesActiveState.isEmpty else { return }
+            tabViewsImages.first?.image = tabViewsImagesActiveState.first
         }
     }
     
@@ -192,3 +215,4 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
         NSLayoutConstraint.activate(constraintsToActivate)
     }
 }
+

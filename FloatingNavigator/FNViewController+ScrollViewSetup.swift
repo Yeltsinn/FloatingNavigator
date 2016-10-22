@@ -47,5 +47,15 @@ extension FNViewController {
                 label.textColor = colorOfTabViewTitlesInInactiveState
             }
         }
+        
+        for (index, imageView) in tabViewsImages.enumerated() {
+            if index == currentPage {
+                guard !tabViewsImagesActiveState.isEmpty else { return }
+                imageView.image = tabViewsImagesActiveState[index]
+            } else {
+                guard !tabViewsImagesInactiveState.isEmpty else { return }
+                imageView.image = tabViewsImagesInactiveState[index]
+            }
+        }
     }
 }
