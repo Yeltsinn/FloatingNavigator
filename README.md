@@ -34,6 +34,8 @@ class ViewController: FNViewController, FNViewControllerDataSource, FNViewContro
 
 # Setup DataSource
 
+> To use these methods is necessary implement FNViewControllerDataSource
+
 ### Required Methods
 ```swift
     func numberOfTabsInSegmentControl() -> Int {
@@ -62,6 +64,9 @@ class ViewController: FNViewController, FNViewControllerDataSource, FNViewContro
 ```
 
 ### Adding SearchBar
+
+> To use this methods is necessary implement FNViewControllerDelegate
+
 ```swift
     func addSearchBar() -> Bool {
         return true
@@ -71,6 +76,8 @@ class ViewController: FNViewController, FNViewControllerDataSource, FNViewContro
 # Customization Methods
 
 ### Setting up Spacings
+
+> To use these methods is necessary implement FNViewControllerDelegate
 
 ![spacing1](https://raw.githubusercontent.com/Yeltsinn/FloatingNavigator/master/Resources/distanceBetweenTabViewComponentsImg.png)
 ```swift
@@ -86,6 +93,7 @@ class ViewController: FNViewController, FNViewControllerDataSource, FNViewContro
 ```
 
 ## SearchBar Customization
+> To use these methods is necessary implement FNViewControllerSearchBarCustomize
 
 ![spacing2](https://raw.githubusercontent.com/Yeltsinn/FloatingNavigator/master/Resources/searchBarCustomization.png)
 ```swift
