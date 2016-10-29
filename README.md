@@ -163,3 +163,7 @@ class TableViewController: UITableViewController, UISearchResultsUpdating {
     }
 ```
 
+## License
+
+[MIT License](https://github.com/Yeltsinn/FloatingNavigator/blob/master/LICENSE)
+
