@@ -117,3 +117,49 @@ class ViewController: FNViewController, FNViewControllerDataSource, FNViewContro
         return UIColor(colorLiteralRed: 225.0/255, green: 228.0/255, blue: 229.0/255, alpha: 1.0)
     }
 ```
+
+## SearchController Responder
+
+To use the FloatingNavigator you just need do setup the protocols UISearchResultsUpdating and UISearchBarDelegate in your tableview classes that will respond to the SearchBar, this way, when the tabview is selected, SearchBar automatically will respond to the methods and protocols from its TableView. 
+
+> Case you need access the SearchController out of the UISearchResultsUpdating and UISearchBarDelegate protocols methods you must create a reference of the main ViewController that inherits from FNViewController in your TabViews Controller Classes.
+
+```swift
+class ViewController: FNViewController, FNViewControllerDataSource, FNViewControllerSearchBarCustomize, FNViewControllerDelegate {
+    
+    var controllersArray: [UIViewController]!
+    var iconsActiveState = ["eventsIcon", "mapIcon", "favoriteIcon"]
+    var iconsInactiveState = ["eventsIconOff", "mapIconOff", "favoriteIconOff"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let controller1 = storyboard!.instantiateViewController(withIdentifier: "Controller1") as! TableViewController
+        let controller2 = storyboard!.instantiateViewController(withIdentifier: "Controller2")
+        let controller3 = storyboard!.instantiateViewController(withIdentifier: "Controller3")
+        
+        // Setting FNViewController rootController in TabView Class
+        controller1.rootController = self
+        
+        controllersArray = [controller1, controller2, controller3]
+        
+        self.fNViewControllerDataSource = self
+        self.fNViewControllerDelegate = self
+        self.fNViewControllerSearchBarCustomize = self
+        self.setupFNSegmentControl()
+        self.tabViewsSeparatorStyle = .singleLine
+    }
+```
+```swift
+class TableViewController: UITableViewController, UISearchResultsUpdating {
+    
+    var rootController: ViewController!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Accessing SearchBar By SearchController
+        rootController.searchController.searchBar
+    }
+```
+
