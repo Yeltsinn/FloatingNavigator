@@ -23,7 +23,7 @@ extension FNViewController {
     }
     
     /* Setup action to swipe gesture in FNSegmentControl */
-    func switchTabView(gesture: UIGestureRecognizer) {
-        scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(gesture.view!.tag), y: 0), animated: true)
+    func switchTabView(_ sender: UIButton) {
+        scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(sender.tag), y: 0), animated: true)
     }
 }

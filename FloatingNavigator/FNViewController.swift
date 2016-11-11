@@ -212,6 +212,7 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
         self.setupViewControllersConstraints()
         self.setConstraintDistanceBetweenTabViews()
         self.setupLabelsTitlesAndImagesConstraints()
+        self.setupSwitchTabViewButtons()
         NSLayoutConstraint.activate(constraintsToActivate)
     }
 }

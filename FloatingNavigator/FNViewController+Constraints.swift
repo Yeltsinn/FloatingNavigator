@@ -65,6 +65,7 @@ extension FNViewController {
                                                               attribute: NSLayoutAttribute.height,
                                                               multiplier: 1,
                                                               constant: tabViewsHeigth)
+        
         constraintHeightFirstTabView.priority = 400
         
         self.constraintsToActivate.append(constraintHeightFirstTabView)
@@ -320,13 +321,11 @@ extension FNViewController {
             tabViewBottomSeparatorDistanceToMarginLeft,
             tabViewBottomSeparatorDistanceToMarginRight])
         
-        
-        
         /* Setup TabView Indicator */
         tabViewIndicator = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 200))
         tabViewIndicator.backgroundColor = colorOfTabViewIndicator
         tabViewIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(tabViewIndicator)
+        self.mainView.addSubview(tabViewIndicator)
         
         let constrainsDistanceToTopTabIndicator = NSLayoutConstraint(item: tabViewIndicator,
                                                                      attribute: NSLayoutAttribute.bottom,
@@ -344,14 +343,6 @@ extension FNViewController {
                                                                         multiplier: 1,
                                                                         constant: 0)
         
-        let constraintHeightTabIndicator = NSLayoutConstraint(item: tabViewIndicator,
-                                                              attribute: NSLayoutAttribute.height,
-                                                              relatedBy: NSLayoutRelation.equal,
-                                                              toItem: nil,
-                                                              attribute: NSLayoutAttribute.height,
-                                                              multiplier: 1,
-                                                              constant: tabViewIndicatorHeigth)
-        
         let constraintWidthTabIndicator = NSLayoutConstraint(item: tabViewIndicator,
                                                              attribute: NSLayoutAttribute.width,
                                                              relatedBy: NSLayoutRelation.equal,
@@ -360,14 +351,22 @@ extension FNViewController {
                                                              multiplier: 1,
                                                              constant: 0)
         
+        let constraintHeightTabIndicator = NSLayoutConstraint(item: tabViewIndicator,
+                                                              attribute: NSLayoutAttribute.height,
+                                                              relatedBy: NSLayoutRelation.equal,
+                                                              toItem: nil,
+                                                              attribute: NSLayoutAttribute.height,
+                                                              multiplier: 1,
+                                                              constant: tabViewIndicatorHeigth)
+        
         distanceTabViewComponentsToSideBounds += tabViewIndicatorHeigth
         
         self.constraintsToActivate.append(contentsOf: [
-            constrainsDistanceToTopTabIndicator,
             distanceTabIndicatorToMarginLeftConstraint,
+            constrainsDistanceToTopTabIndicator,
             constraintHeightTabIndicator,
-            constraintWidthTabIndicator
-            ])
+            constraintHeightTabIndicator,
+            constraintWidthTabIndicator])
     }
     
     /* MARK: Tab Header View Constraints */
@@ -511,6 +510,7 @@ extension FNViewController {
             stackView.distribution = .equalSpacing
             stackView.alignment = .center
             stackView.spacing = distanceBetweenTabViewComponents
+            stackView.isUserInteractionEnabled = true
             view.addSubview(stackView)
             
             /* -- StackView Constraints -- */
@@ -607,11 +607,6 @@ extension FNViewController {
                 labelTitle.translatesAutoresizingMaskIntoConstraints = false
                 stackView.addArrangedSubview(labelTitle)
                 tabViewsTitlesLabels.append(labelTitle)
-                
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(FNViewController.switchTabView(gesture:)))
-                tapGesture.numberOfTapsRequired = 1
-                labelTitle.isUserInteractionEnabled = true
-                labelTitle.addGestureRecognizer(tapGesture)
             }
         }
     }
@@ -671,6 +666,57 @@ extension FNViewController {
                     constraintWidthTabViewSeparator,
                     tabViewSeparatorDistanceToMarginLeft])
             }
+        }
+    }
+    
+    func setupSwitchTabViewButtons() {
+        
+        for (index, tabView) in tabViews.enumerated() {
+            
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.backgroundColor = UIColor.clear
+            button.addTarget(self, action: #selector(switchTabView(_:)), for: UIControlEvents.touchUpInside)
+            button.tag = index
+            mainView.addSubview(button)
+            
+            let constraintWidthButton = NSLayoutConstraint(item: button,
+                                                           attribute: NSLayoutAttribute.right,
+                                                           relatedBy: NSLayoutRelation.equal,
+                                                           toItem: tabView,
+                                                           attribute: NSLayoutAttribute.right,
+                                                           multiplier: 1,
+                                                           constant: 0)
+            
+            let constraintHeightButton = NSLayoutConstraint(item: button,
+                                                            attribute: NSLayoutAttribute.left,
+                                                            relatedBy: NSLayoutRelation.equal,
+                                                            toItem: tabView,
+                                                            attribute: NSLayoutAttribute.left,
+                                                            multiplier: 1,
+                                                            constant: 0)
+            
+            let constraintDistanceFirstTabViewToMarginLeft2 = NSLayoutConstraint(item: button,
+                                                                                 attribute: NSLayoutAttribute.top,
+                                                                                 relatedBy: NSLayoutRelation.equal,
+                                                                                 toItem: tabView,
+                                                                                 attribute: NSLayoutAttribute.top,
+                                                                                 multiplier: 1,
+                                                                                 constant: 0)
+            
+            let constraintCenterXButtonToTabView = NSLayoutConstraint(item: button,
+                                                                      attribute: NSLayoutAttribute.bottom,
+                                                                      relatedBy: NSLayoutRelation.equal,
+                                                                      toItem: tabView,
+                                                                      attribute: NSLayoutAttribute.bottom,
+                                                                      multiplier: 1,
+                                                                      constant: 0)
+            
+            self.constraintsToActivate.append(contentsOf: [
+                constraintWidthButton,
+                constraintHeightButton,
+                constraintDistanceFirstTabViewToMarginLeft2,
+                constraintCenterXButtonToTabView])
         }
     }
 }
