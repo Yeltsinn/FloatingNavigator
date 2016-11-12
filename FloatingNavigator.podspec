@@ -7,17 +7,15 @@ s.name = "FloatingNavigator"
 s.summary = ""
 s.requires_arc = true
 
-# 2
 s.version = "0.1.0"
 
-# 3
 s.license = { :type => "MIT", :file => "LICENSE" }
 
 s.author = { "Yeltsin Lobato" => "yeltsin.lobato@gmail.com" }
 
-# s.homepage = "https://github.com/Yeltsinn/FloatingNavigator"
+s.homepage = "https://github.com/Yeltsinn/FloatingNavigator"
 
-# s.source = { :git => "https://github.com/Yeltsinn/FloatingNavigator.git", :tag => "#{s.version}"}
+s.source = { :git => "https://github.com/Yeltsinn/FloatingNavigator.git", :tag => "#{s.version}"}
 
 s.source_files = "FloatingNavigator/**/*.{swift}"
 
