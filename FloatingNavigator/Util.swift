@@ -49,3 +49,7 @@ protocol FNViewControllerSearchBarCustomize {
 enum TabViewSeparatorStyle {
     case none, singleLine
 }
+
+enum TabViewIndicatorStyle {
+    case simple, tabViewFilled
+}

@@ -291,14 +291,6 @@ extension FNViewController {
                                                                         multiplier: 1,
                                                                         constant: 0)
         
-        let constraintHeightTabViewSeparator = NSLayoutConstraint(item: tabViewBase,
-                                                                  attribute: NSLayoutAttribute.height,
-                                                                  relatedBy: NSLayoutRelation.equal,
-                                                                  toItem: nil,
-                                                                  attribute: NSLayoutAttribute.height,
-                                                                  multiplier: 1,
-                                                                  constant: 1)
-        
         let tabViewBottomSeparatorDistanceToMarginLeft = NSLayoutConstraint(item: tabViewBase,
                                                                             attribute: NSLayoutAttribute.left,
                                                                             relatedBy: NSLayoutRelation.equal,
@@ -315,11 +307,19 @@ extension FNViewController {
                                                                              multiplier: 1,
                                                                              constant: 0)
         
+        let constraintHeightTabViewSeparator = NSLayoutConstraint(item: tabViewBase,
+                                                                  attribute: NSLayoutAttribute.height,
+                                                                  relatedBy: NSLayoutRelation.equal,
+                                                                  toItem: nil,
+                                                                  attribute: NSLayoutAttribute.height,
+                                                                  multiplier: 1,
+                                                                  constant: 1)
+
         self.constraintsToActivate.append(contentsOf: [
-            tabViewBottomSeparatorDistanceToBottom,
             constraintHeightTabViewSeparator,
+            tabViewBottomSeparatorDistanceToMarginRight,
             tabViewBottomSeparatorDistanceToMarginLeft,
-            tabViewBottomSeparatorDistanceToMarginRight])
+            tabViewBottomSeparatorDistanceToBottom])
         
         /* Setup TabView Indicator */
         tabViewIndicator = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 200))
@@ -351,13 +351,31 @@ extension FNViewController {
                                                              multiplier: 1,
                                                              constant: 0)
         
-        let constraintHeightTabIndicator = NSLayoutConstraint(item: tabViewIndicator,
-                                                              attribute: NSLayoutAttribute.height,
-                                                              relatedBy: NSLayoutRelation.equal,
-                                                              toItem: nil,
-                                                              attribute: NSLayoutAttribute.height,
-                                                              multiplier: 1,
-                                                              constant: tabViewIndicatorHeigth)
+        let constraintHeightTabIndicator: NSLayoutConstraint!
+        if tabViewIndicatorStyle == .simple {
+            
+            constraintHeightTabIndicator = NSLayoutConstraint(item: tabViewIndicator,
+                                                                  attribute: NSLayoutAttribute.height,
+                                                                  relatedBy: NSLayoutRelation.equal,
+                                                                  toItem: nil,
+                                                                  attribute: NSLayoutAttribute.height,
+                                                                  multiplier: 1,
+                                                                  constant: tabViewIndicatorHeigth)
+            
+        } else {
+            
+            tabViewIndicator.layer.zPosition = -1
+            constraintHeightTabIndicator = NSLayoutConstraint(item: tabViewBase,
+                                                                  attribute: NSLayoutAttribute.top,
+                                                                  relatedBy: NSLayoutRelation.equal,
+                                                                  toItem: tabViews.first,
+                                                                  attribute: NSLayoutAttribute.top,
+                                                                  multiplier: 1,
+                                                                  constant: 1)
+        }
+        
+        
+
         
         distanceTabViewComponentsToSideBounds += tabViewIndicatorHeigth
         

@@ -52,6 +52,13 @@ class FNViewController: UIViewController, UIScrollViewDelegate {
     internal var scrollView: UIScrollView!
     internal var mainView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     internal var headerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    internal var tabViewIndicatorStyle: TabViewIndicatorStyle = .simple
+        {
+        didSet {
+            self.checkFNViewControllerDataSourceRequired()
+            self.setupTabIndicatorConstraints()
+        }
+    }
     internal var tabViewsSeparatorStyle: TabViewSeparatorStyle = .none {
         didSet {
             self.checkFNViewControllerDataSourceRequired()
